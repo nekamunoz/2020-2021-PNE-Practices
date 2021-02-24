@@ -23,14 +23,12 @@ def seq_count_base(seq, base):
 
 
 def seq_count(seq):
-    a, c, g, t = 0, 0, 0, 0
+    gene_dict = {"A": 0, "C": 0, "G": 0, "T": 0}
     for d in seq:
-        if d == "A":
-            a += 1
-        elif d == "C":
-            c += 1
-        elif d == "G":
-            g += 1
-        else:
-            t += 1
-    return {"A": a, "C": c, "G": g, "T": t}
+        gene_dict[d] += 1
+    return gene_dict
+
+
+def seq_reverse(seq):
+    reverse_seq = seq[::-1]
+    return reverse_seq
