@@ -32,3 +32,22 @@ def seq_count(seq):
 def seq_reverse(seq):
     reverse_seq = seq[::-1]
     return reverse_seq
+
+
+def seq_complement(seq):
+    complement = ""
+    for d in seq:
+        if d == "A":
+            complement += "T"
+        elif d == "T":
+            complement += "A"
+        elif d == "G":
+            complement += "C"
+        else:
+            complement += "G"
+    return complement
+
+
+def seq_frequent(dict_count):
+    return max(dict_count, key=dict_count.get)
+
