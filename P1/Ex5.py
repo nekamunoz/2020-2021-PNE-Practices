@@ -10,4 +10,4 @@ def print_result(i, sequence):
 
 
 for i in range(0, len(list_seq)):
-    print_result(i, list_seq[i - 1])
+    print_result(i, list_seq[i])

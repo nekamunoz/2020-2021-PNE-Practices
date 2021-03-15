@@ -8,7 +8,7 @@ class Seq:
 
     def __init__(self, str_bases=NULL_SEQUENCE):
         if str_bases == Seq.NULL_SEQUENCE:
-            print("NULL seq created.")
+            print("NULL seq created")
             self.str_bases = str_bases
         elif Seq.is_valid_seq2(str_bases):
             self.str_bases = str_bases
@@ -59,6 +59,10 @@ class Seq:
                     c += 1
         return a, c, g, t
 
+    @staticmethod
+    def frequent_base(dict_count):
+        return max(dict_count, key=dict_count.get)
+
     def count(self):
         a, c, g, t = self.count_bases()
         return {"A" : a, "C": c, "G" : g, "T" : t}
@@ -95,20 +99,7 @@ class Seq:
 
     def read_fasta(self, filename):
         self.str_bases = Seq.take_out_first_line(Path(filename).read_text())
-
-
-
-
-
-
-
-
-
-
-
-def seq_frequent(dict_count):
-    return max(dict_count, key=dict_count.get)
-
+        return filename
 
 def generate_seqs(pattern, number):
     seq = []
@@ -121,5 +112,6 @@ def test_sequences():
     s1 = Seq()
     s2 = Seq("AGTA")
     s3 = Seq("Invalid sequence")
-    return s1, s2, s3
+    s4 = Seq()
+    return s1, s2, s3, s4
 
