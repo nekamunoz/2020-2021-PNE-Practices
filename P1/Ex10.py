@@ -25,4 +25,5 @@ print_result("",s4, filename4)
 
 s5 = Seq()
 filename5 = s5.read_fasta(PROJECT_PATH + "FXN.txt")
-print_result("",s5, filename5)
+print_result("",s5
+             , filename5)
