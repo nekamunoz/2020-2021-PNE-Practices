@@ -29,10 +29,10 @@ try:
 
         # Read the message from the client, if any
         msg = clientsocket.recv(2048).decode("utf-8")
-        print("Message from client: {}".format(msg))
+        print("Message from client: {}".format(colored(msg, "red")))
 
         # Send the messag
-        message = "Hello from the teacher's server"
+        message = "Hello from the server 2!!"
         # We must write bytes, not a string
         clientsocket.send(message.encode())
         clientsocket.close()
