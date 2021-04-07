@@ -31,7 +31,7 @@ try:
         msg = clientsocket.recv(2048).decode("utf-8")
         print("Message from client: {}".format(colored(msg, "green")))
 
-        # Send the messag
+        # Send the message
         message = "Hello from the server 1!!"
         # We must write bytes, not a string
         clientsocket.send(message.encode())

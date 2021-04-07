@@ -24,6 +24,6 @@ while i < len(s.str_bases) and count < 10:
     fragment_text = "Fragment "+ str(count) + ": " + fragment
     print(fragment_text)
     if count % 2 == 0:
-        print(c_2.talk(fragment_text))
+        print(c_2.debug_talk(fragment_text))
     else:
-        print(c.talk(fragment_text))
+        print(c.debug_talk(fragment_text))

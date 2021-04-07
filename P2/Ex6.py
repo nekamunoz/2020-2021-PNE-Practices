@@ -21,4 +21,4 @@ while i < len(s.str_bases) and count < 5:
     i += 10
     fragment_text = "Fragment "+ str(count) + ":" + fragment
     print(fragment_text)
-    print(c.talk(fragment_text))
+    print(c.debug_talk(fragment_text))
