@@ -1,5 +1,4 @@
 from client0 import Client
-from pathlib import Path
 from Seq1 import Seq
 
 PRACTICE = 2
@@ -19,6 +18,6 @@ while i < len(s.str_bases) and count < 5:
     fragment = s.str_bases[i:i+10]
     count += 1
     i += 10
-    fragment_text = "Fragment "+ str(count) + ":" + fragment
+    fragment_text = "Fragment " + str(count) + ":" + fragment
     print(fragment_text)
     print(c.debug_talk(fragment_text))

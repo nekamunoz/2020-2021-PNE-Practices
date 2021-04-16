@@ -59,13 +59,20 @@ class Seq:
                     c += 1
         return a, c, g, t
 
+    def percentage_base(self, count_bases, seq_len):
+        a = str(round(count_bases[0] / seq_len*100, 2)) + "%"
+        c = str(round(count_bases[1] / seq_len * 100, 2)) + "%"
+        g = str(round(count_bases[2] / seq_len * 100, 2)) + "%"
+        t = str(round(count_bases[3] / seq_len * 100, 2)) + "%"
+        return a, c, g, t
+
     @staticmethod
     def frequent_base(dict_count):
         return max(dict_count, key=dict_count.get)
 
     def count(self):
         a, c, g, t = self.count_bases()
-        return {"A" : a, "C": c, "G" : g, "T" : t}
+        return {"A" : a, "C": c , "G" : g, "T" : t}
 
     def reverse(self):
         if self.str_bases == Seq.NULL_SEQUENCE:

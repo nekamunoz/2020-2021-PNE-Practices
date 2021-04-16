@@ -23,11 +23,10 @@ class Client:
     def talk(self, msg):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((self.ip, self.port))
-        print("To server:", msg)
-        s.send(msg.encode())
+        s.send(bytes(msg, "utf-8"))
         response = s.recv(2048).decode("utf-8")
         s.close()
-        return "From server: " + response
+        return response
 
     def debug_talk(self, msg):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,7 +34,5 @@ class Client:
         print("To server:", colored(msg, "blue"))
         s.send(str.encode(msg))
         response = colored(s.recv(2048).decode("utf-8"), "green")
-        print("From server: ", end="")
-        print(colored(response, "green"))
         s.close()
         return "From server: " + response
