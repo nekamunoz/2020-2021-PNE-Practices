@@ -33,42 +33,49 @@ def gene(seq_name):
     return content
 
 
+def operation(seq, op):
+    if op == "Info":
+        context = info(seq)
+    elif op == "Comp":
+        context = comp(seq)
+    elif op == "Rev":
+        context = rev(seq)
+    context["sequence"] = seq
+    context["op_name"] = op
+    content = read_template_html_file("html/operation.html").render(context=context)
+    return content
 
 
-
-
-def info(cs, seq):
-    print_colored("INFO", "yellow")
+def info(seq):
     s1 = Seq(seq)
     count_bases = s1.count_bases()
     nucleotides = ("A", "C", "G", "T")
     percentage = s1.percentage_base(count_bases, s1.len())
-    response1 = "Sequence: " + str(s1) + "\nTotal length: " + str(s1.len()) + "\n"
-    print(response1)
     i = 0
-    response2 = ""
+    percentage_bases = ""
     for i in range(0, len(count_bases)):
-        response2 += nucleotides[i] + ": " + str(count_bases[i]) + " (" + percentage[i] + ")\n"
+        percentage_bases += nucleotides[i] + ": " + str(count_bases[i]) + " (" + percentage[i] + ")"
         i += 1
-    print(response2)
-    cs.send((response1 + response2).encode())
+    context = {
+        "result": [s1.len, percentage_bases]
+    }
+    return context
 
 
-def comp(cs, seq):
-    print_colored("COMP", "green")
+
+def comp(seq):
     s1 = Seq(seq)
-    response = "Complement: " + s1.complement() + "\n"
-    print(response.replace("\n",""))
-    cs.send(response.encode())
+    context = {
+        "result": s1.complement()
+    }
+    return context
 
 
-def rev(cs, seq):
-    print_colored("REV", "green")
+def rev(seq):
     s1 = Seq(seq)
-    response = "Reverse: " + s1.reverse() + "\n"
-    print(response.replace("\n",""))
-    cs.send(response.encode())
-
-
+    context = {
+        "result": s1.reverse()
+    }
+    return context
 
 

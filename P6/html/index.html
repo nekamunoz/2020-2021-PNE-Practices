@@ -36,10 +36,13 @@
           Write a sequence: <input type="text" name="sequence">
           <br>
           Select operation:
-            <input type="radio" name="calculation" value="Info"> Info
-            <input type="radio" name="calculation" value="Comp"> Comp
-            <input type="radio" name="calculation" value="Rev"> Rev
+          <from name="operation">
+            {% for n in context.operations %}
+              <input type="radio" name="calculation" value="{{n}}">{{n}}</input>
+            {% endfor %}
+          </from>
           <br>
+          Perform operation:
           <input type="submit" value="OPERATION">
         </form>
       <hr>

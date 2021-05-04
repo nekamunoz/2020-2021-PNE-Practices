@@ -7,11 +7,12 @@ import jinja2
 import server_utils2 as su
 
 
-PORT = 8080
+PORT = 9090
 HTML_ASSETS = "./html/"
 LIST_SEQUENCE = ["ATTCGATGTGCTAGTCGATGCTGTGTACGTCAGTCAGTCGAT", "CAGTAGATGACGAGCGATGAGCAACCGCATCGAT", "ACGATATAGGAGATATGAGGACACACAATGAGATACA",
      "CAGTACAGATAGAGACATAGATATCACTATACAAAAAAAAAAGTTGAGTA", "CGATACGCAGACTATCGACTAGATATA"]
 LIST_GENES = ["ADA", "FRAT1", "FXN", "RNU6_269P", "U5" ]
+LIST_FUNC = ["Info", "Comp", "Rev"]
 socketserver.TCPServer.allow_reuse_address = True
 
 
@@ -30,6 +31,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if path_name == "/":
             context["n_sequences"] = len(LIST_SEQUENCE)
             context["name_genes"] = LIST_GENES
+            context["operations"] = LIST_FUNC
             contents = su.read_template_html_file("./html/index.html").render(context=context)
         elif path_name == "/ping":
             contents = su.read_template_html_file("html/ping.html").render()
@@ -41,8 +43,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = su.gene(gene)
         elif path_name == "/operation":
             sequence = arguments["sequence"][0]
-            operation = arguments["calculation"][0]
-
+            operation_name = arguments["calculation"][0]
+            contents = su.operation(sequence, operation_name)
         else:
             contents = su.read_template_html_file("./html/ERROR.html").render()
         self.send_response(200)
