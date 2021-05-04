@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Seq server</title>
       </head>
-      <body style="background-color: pink;">
+      <body style="background-color: white;">
         <h2>Sequence</h2>
         <p>{{context.sequence}}</p>
         <br>
@@ -13,12 +13,11 @@
         <br>
         <h2>Results</h2>
         {% if context.op_name == "Info" %}
-        <br>
-        <p>Total length: {{context.result[0][0]}}</p>
-        <p>{{context.result[0][1]}}</p>
+        <p>Total length: {{context.result[0]}}</p>
+        <p>{{context.result[1]}}</p>
         {% else %}
-        <p>{{context.result[0]}}</p>
-        {% endfor %}
+        <p>{{context.result}}</p>
+        {% endif %}
         <br>
         <a href="/">Main page</a>
       </body>

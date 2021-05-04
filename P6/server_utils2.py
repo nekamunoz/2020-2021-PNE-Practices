@@ -54,11 +54,12 @@ def info(seq):
     i = 0
     percentage_bases = ""
     for i in range(0, len(count_bases)):
-        percentage_bases += nucleotides[i] + ": " + str(count_bases[i]) + " (" + percentage[i] + ")"
+        percentage_bases += nucleotides[i] + ": " + str(count_bases[i]) + " (" + percentage[i] + ")\n"
         i += 1
     context = {
-        "result": [s1.len, percentage_bases]
+        "result": [str(s1.len()), percentage_bases]
     }
+    print(context)
     return context
 
 

@@ -42,9 +42,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             gene = arguments["gene"][0]
             contents = su.gene(gene)
         elif path_name == "/operation":
-            sequence = arguments["sequence"][0]
-            operation_name = arguments["calculation"][0]
-            contents = su.operation(sequence, operation_name)
+            try:
+                sequence = arguments["sequence"][0]
+                operation_name = arguments["calculation"][0]
+                contents = su.operation(sequence, operation_name)
+            except KeyError:
+                contents = su.read_template_html_file("./html/ERROR.html").render()
         else:
             contents = su.read_template_html_file("./html/ERROR.html").render()
         self.send_response(200)
