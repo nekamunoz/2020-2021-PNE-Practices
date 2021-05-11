@@ -2,7 +2,7 @@ import http.client
 import json
 
 SERVER = "rest.ensembl.org"
-ENDPOINT = "/info/ping"
+ENDPOINT = "/documentation/info"
 PARAMS = "?content-type=application/json"
 
 connection = http.client.HTTPConnection(SERVER)
