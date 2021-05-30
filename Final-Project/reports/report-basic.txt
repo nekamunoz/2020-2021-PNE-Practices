@@ -1,0 +1,46 @@
+Test report BASIC LEVEL
+=============================
+
+---> listSpecies endpoint
+-----------------TEST 1--------------------
+* Input:
+http://127.0.0.1:8080/listSpecies?limit=2
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIST OF SPECIES IN THE BROWSER</title>
+</head>
+<body style="background-color: lightblue;">
+<body>
+   The total number of species in the ensembl is : 267 <br>
+   The limit you have selected is : 2 <br>
+   The names of the species are : <ul><li>Burton's mouthbrooder</li><li>Agassiz's desert tortoise</li>
+</body>
+</html>
+
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>LIST OF SPECIES</title>
+      </head>
+      <body style="background-color: lightskyblue;">
+        <h1>List of species in the genome database</h1>
+        <p>The total number of species in the ensembl is: 310</p>
+        <p>The limit you have selected is: 5</p>
+        <p>The names of the species are:</p>
+        <ul><li type="disc">Little spotted kiwi</li></ul><ul><li type="disc">Indian glassy fish</li></ul>
+        <ul><li type="disc">Blue tit</li></ul><ul><li type="disc">Narwhal</li></ul><ul><li type="disc">American beaver</li</ul>
+        <br>
+        <a href="/">Main page</a>
+      </body>
+    </html>
+
+...
+...
+Many more test here!
+...
+...

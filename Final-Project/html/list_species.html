@@ -8,12 +8,7 @@
         <h1>List of species in the genome database</h1>
         <p>The total number of species in the ensembl is: {{context.number_species}}</p>
         <p>The limit you have selected is: {{context.limit}}</p>
-        <p>The names of the species are:</p>
-        {% for n in context.list_species %}
-        <ul>
-          <li type="disc">{{n}}</li>
-        </ul>
-        {% endfor %}
+        <p>The names of the species are:</p>{% for n in context.list_species %}<ul><li type="disc">{{n}}</li></ul>{% endfor %}
         <br>
         <a href="/">Main page</a>
       </body>

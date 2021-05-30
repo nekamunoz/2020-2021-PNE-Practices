@@ -54,4 +54,13 @@ def list_chrom(data_dict, specie):
     return content
 
 
+def list_len(data_dict, specie, chromo):
+    try:
+        chromo_len = data_dict["top_level_region"][int(chromo)]["length"]
+        context = {"specie": specie, "chromo": chromo, "chromo_len": chromo_len}
+        content = read_template_html_file("html/chromosomeLength.html").render(context=context)
+    except KeyError:
+        content = read_template_html_file("html/error.html").render()
+    return content
+
 
