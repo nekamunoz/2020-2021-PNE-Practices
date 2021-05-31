@@ -4,13 +4,10 @@
         <meta charset="utf-8">
         <title>KARYOTYPE</title>
       </head>
-      <body style="background-color: lightskyblue;">
+      <body style="background-color: lightcyan;">
         <h1>Karyotype of the {{context.specie}}</h1>
         <p>The names of the chromosomes are:</p>
-        {% for n in context.karyotype %}
-            {{n}}<br>
-        {% endfor %}
-        <br>
-        <a href="/">Main page</a>
+        {% for n in context.karyotype %} {{n}}<br>{% endfor %}
+        <br><a href="/">Main page</a>
       </body>
     </html>

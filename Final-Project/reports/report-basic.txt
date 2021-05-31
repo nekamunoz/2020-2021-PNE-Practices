@@ -4,23 +4,9 @@ Test report BASIC LEVEL
 ---> listSpecies endpoint
 -----------------TEST 1--------------------
 * Input:
-http://127.0.0.1:8080/listSpecies?limit=2
+http://127.0.0.1:8080/listSpecies?limit=3
 
 * Output:
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LIST OF SPECIES IN THE BROWSER</title>
-</head>
-<body style="background-color: lightblue;">
-<body>
-   The total number of species in the ensembl is : 267 <br>
-   The limit you have selected is : 2 <br>
-   The names of the species are : <ul><li>Burton's mouthbrooder</li><li>Agassiz's desert tortoise</li>
-</body>
-</html>
-
 <!DOCTYPE html>
     <html lang="en" dir="ltr">
       <head>
@@ -30,17 +16,151 @@ http://127.0.0.1:8080/listSpecies?limit=2
       <body style="background-color: lightskyblue;">
         <h1>List of species in the genome database</h1>
         <p>The total number of species in the ensembl is: 310</p>
-        <p>The limit you have selected is: 5</p>
+        <p>The limit you have selected is: 3</p>
         <p>The names of the species are:</p>
-        <ul><li type="disc">Little spotted kiwi</li></ul><ul><li type="disc">Indian glassy fish</li></ul>
-        <ul><li type="disc">Blue tit</li></ul><ul><li type="disc">Narwhal</li></ul><ul><li type="disc">American beaver</li</ul>
-        <br>
+        <ul><li type="disc">Little spotted kiwi</li></ul><ul><li type="disc">Indian glassy fish</li></ul><ul><li type="disc">Blue tit</li></ul>
         <a href="/">Main page</a>
       </body>
     </html>
 
-...
-...
-Many more test here!
-...
-...
+-----------------TEST 2--------------------
+* Input:
+http://127.0.0.1:8080/listSpecies?limit=
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>LIST OF SPECIES</title>
+      </head>
+      <body style="background-color: lightblue;">
+        <h1>List of species in the genome database</h1>
+        <p>The total number of species in the ensembl is: 310</p>
+        <p>The limit you have selected is: 310</p>
+        <p>The names of the species are:</p>
+        <ul><li type="disc">Little spotted kiwi</li></ul><ul><li type="disc">Indian glassy fish</li></ul><ul><li type="disc">Blue tit</li></ul><ul><li type="disc">Narwhal</li></ul><ul><li type="disc">American beaver</li></ul><ul><li type="disc">Lumpfish</li></ul><ul><li type="disc">Chinese hamster CHOK1GS</li></ul><ul><li type="disc">Channel bull blenny</li></ul><ul><li type="disc">Golden Hamster</li></ul><ul><li type="disc">Wild yak</li></ul><ul><li type="disc">Siamese fighting fish</li></ul><ul><li type="disc">Eastern happy</li></ul><ul><li type="disc">Hyrax</li></ul><ul><li type="disc">Eurasian eagle-owl</li></ul><ul><li type="disc">Japanese quail</li></ul><ul><li type="disc">Fugu</li></ul><ul><li type="disc">Asian bonytongue</li></ul><ul><li type="disc">Blue-ringed sea krait</li></ul><ul><li type="disc">Mouse CBA/J</li></ul><ul><li type="disc">Agassiz's desert tortoise</li></ul><ul><li type="disc">Lyretail cichlid</li></ul><ul><li type="disc">Coho salmon</li></ul><ul><li type="disc">Oriental scops-owl</li></ul><ul><li type="disc">Zebra mbuna</li></ul><ul><li type="disc">Arctic ground squirrel</li></ul><ul><li type="disc">Clown anemonefish</li></ul><ul><li type="disc">Koala</li></ul><ul><li type="disc">Algerian mouse</li></ul><ul><li type="disc">Sheep (texel)</li></ul><ul><li type="disc">Mouse C3H/HeJ</li></ul><ul><li type="disc">Dog</li></ul><ul><li type="disc">Spoon-billed sandpiper</li></ul><ul><li type="disc">Northern American deer mouse</li></ul><ul><li type="disc">Burrowing owl</li></ul><ul><li type="disc">Saccharomyces cerevisiae</li></ul><ul><li type="disc">Spotted gar</li></ul><ul><li type="disc">Steppe mouse</li></ul><ul><li type="disc">Canada lynx</li></ul><ul><li type="disc">Polar bear</li></ul><ul><li type="disc">Amazon molly</li></ul><ul><li type="disc">Tongue sole</li></ul><ul><li type="disc">Platypus</li></ul><ul><li type="disc">Common snapping turtle</li></ul><ul><li type="disc">Painted turtle</li></ul><ul><li type="disc">Opossum</li></ul><ul><li type="disc">Golden snub-nosed monkey</li></ul><ul><li type="disc">Helmeted guineafowl</li></ul><ul><li type="disc">Golden-line barbel</li></ul><ul><li type="disc">C.savignyi</li></ul><ul><li type="disc">Gorilla</li></ul><ul><li type="disc">Northern pike</li></ul><ul><li type="disc">Swamp eel</li></ul><ul><li type="disc">Indian peafowl</li></ul><ul><li type="disc">Barramundi perch</li></ul><ul><li type="disc">Meerkat</li></ul><ul><li type="disc">Chinese medaka</li></ul><ul><li type="disc">Pig - Wuzhishan</li></ul><ul><li type="disc">Makobe Island cichlid</li></ul><ul><li type="disc">Reedfish</li></ul><ul><li type="disc">Ryukyu mouse</li></ul><ul><li type="disc">Red fox</li></ul><ul><li type="disc">Wallaby</li></ul><ul><li type="disc">Central bearded dragon</li></ul><ul><li type="disc">Vaquita</li></ul><ul><li type="disc">Capuchin</li></ul><ul><li type="disc">Alpaca</li></ul><ul><li type="disc">Lesser hedgehog tenrec</li></ul><ul><li type="disc">Angola colobus</li></ul><ul><li type="disc">Pig-tailed macaque</li></ul><ul><li type="disc">Cow</li></ul><ul><li type="disc">Orbiculate cardinalfish</li></ul><ul><li type="disc">Eastern spot-billed duck</li></ul><ul><li type="disc">Common carp hebao red</li></ul><ul><li type="disc">Yellowtail amberjack</li></ul><ul><li type="disc">Brazilian guinea pig</li></ul><ul><li type="disc">Mexican tetra</li></ul><ul><li type="disc">Ruff</li></ul><ul><li type="disc">Domestic yak</li></ul><ul><li type="disc">Zebra finch</li></ul><ul><li type="disc">Black snub-nosed monkey</li></ul><ul><li type="disc">Bengalese finch</li></ul><ul><li type="disc">Damara mole rat</li></ul><ul><li type="disc">Japanese medaka HdrR</li></ul><ul><li type="disc">Budgerigar</li></ul><ul><li type="disc">Tarsier</li></ul><ul><li type="disc">Chacoan peccary</li></ul><ul><li type="disc">Platyfish</li></ul><ul><li type="disc">Duck</li></ul><ul><li type="disc">Swainson's thrush</li></ul><ul><li type="disc">Elephant shark</li></ul><ul><li type="disc">Turquoise killifish</li></ul><ul><li type="disc">Pig USMARC</li></ul><ul><li type="disc">Ugandan red Colobus</li></ul><ul><li type="disc">Pig - Tibetan</li></ul><ul><li type="disc">Lion</li></ul><ul><li type="disc">Lesser Egyptian jerboa</li></ul><ul><li type="disc">Stickleback</li></ul><ul><li type="disc">Guinea Pig</li></ul><ul><li type="disc">Dingo</li></ul><ul><li type="disc">Daurian ground squirrel</li></ul><ul><li type="disc">Dog - Basenji</li></ul><ul><li type="disc">Three-toed box turtle</li></ul><ul><li type="disc">Tasmanian devil</li></ul><ul><li type="disc">Siberian musk deer</li></ul><ul><li type="disc">Pig - Largewhite</li></ul><ul><li type="disc">Mouse A/J</li></ul><ul><li type="disc">Indian medaka</li></ul><ul><li type="disc">Mouse CAST/EiJ</li></ul><ul><li type="disc">Cat</li></ul><ul><li type="disc">Chinese hamster CriGri</li></ul><ul><li type="disc">Rat</li></ul><ul><li type="disc">Alpine marmot</li></ul><ul><li type="disc">Goat</li></ul><ul><li type="disc">Medium ground-finch</li></ul><ul><li type="disc">Shrew mouse</li></ul><ul><li type="disc">Megabat</li></ul><ul><li type="disc">Orangutan</li></ul><ul><li type="disc">Atlantic salmon</li></ul><ul><li type="disc">Sooty mangabey</li></ul><ul><li type="disc">Chicken</li></ul><ul><li type="disc">Green anole</li></ul><ul><li type="disc">Argentine black and white tegu</li></ul><ul><li type="disc">Degu</li></ul><ul><li type="disc">Indian cobra</li></ul><ul><li type="disc">Drill</li></ul><ul><li type="disc">Caenorhabditis elegans</li></ul><ul><li type="disc">Marmoset</li></ul><ul><li type="disc">Goodes thornscrub tortoise</li></ul><ul><li type="disc">Rufous-capped babbler</li></ul><ul><li type="disc">Pink-footed goose</li></ul><ul><li type="disc">Pig - Landrace</li></ul><ul><li type="disc">Upper Galilee mountains blind mole rat</li></ul><ul><li type="disc">Bicolor damselfish</li></ul><ul><li type="disc">Live sharksucker</li></ul><ul><li type="disc">Coquerel's sifaka</li></ul><ul><li type="disc">Dolphin</li></ul><ul><li type="disc">Mouse LP/J</li></ul><ul><li type="disc">Tree Shrew</li></ul><ul><li type="disc">Atlantic herring</li></ul><ul><li type="disc">Greater horseshoe bat</li></ul><ul><li type="disc">Gouldian finch</li></ul><ul><li type="disc">C.intestinalis</li></ul><ul><li type="disc">Blue tilapia</li></ul><ul><li type="disc">Tropical clawed frog</li></ul><ul><li type="disc">California sea lion</li></ul><ul><li type="disc">Dog - Great Dane</li></ul><ul><li type="disc">Muscovy Duck (domestic type)</li></ul><ul><li type="disc">Mouse NOD/ShiLtJ</li></ul><ul><li type="disc">Goat (black bengal)</li></ul><ul><li type="disc">Human</li></ul><ul><li type="disc">Great spotted kiwi</li></ul><ul><li type="disc">Ocean sunfish</li></ul><ul><li type="disc">Bolivian squirrel monkey</li></ul><ul><li type="disc">Chinook salmon</li></ul><ul><li type="disc">Zig-zag eel</li></ul><ul><li type="disc">Naked mole-rat female</li></ul><ul><li type="disc">Turkey</li></ul><ul><li type="disc">Armadillo</li></ul><ul><li type="disc">Paramormyrops kingsleyae</li></ul><ul><li type="disc">Guppy</li></ul><ul><li type="disc">Lamprey</li></ul><ul><li type="disc">Hybrid - Bos Indicus</li></ul><ul><li type="disc">Sloth</li></ul><ul><li type="disc">Huchen</li></ul><ul><li type="disc">Rainbow trout</li></ul><ul><li type="disc">Large yellow croaker</li></ul><ul><li type="disc">Asiatic black bear</li></ul><ul><li type="disc">Pig - Pietrain</li></ul><ul><li type="disc">Blue-crowned manakin</li></ul><ul><li type="disc">Javanese ricefish</li></ul><ul><li type="disc">Swan goose</li></ul><ul><li type="disc">Blunt-snouted clingfish</li></ul><ul><li type="disc">African ostrich</li></ul><ul><li type="disc">Common carp</li></ul><ul><li type="disc">Turbot</li></ul><ul><li type="disc">Hedgehog</li></ul><ul><li type="disc">Olive baboon</li></ul><ul><li type="disc">Western mosquitofish</li></ul><ul><li type="disc">Long-tailed chinchilla</li></ul><ul><li type="disc">Hagfish</li></ul><ul><li type="disc">Macaque</li></ul><ul><li type="disc">Prairie vole</li></ul><ul><li type="disc">Atlantic cod</li></ul><ul><li type="disc">Microbat</li></ul><ul><li type="disc">Pike-perch</li></ul><ul><li type="disc">Midas cichlid</li></ul><ul><li type="disc">Mouse Lemur</li></ul><ul><li type="disc">Beluga whale</li></ul><ul><li type="disc">Mouse AKR/J</li></ul><ul><li type="disc">Dark-eyed junco</li></ul><ul><li type="disc">Ferret</li></ul><ul><li type="disc">Blind barbel</li></ul><ul><li type="disc">Emu</li></ul><ul><li type="disc">Collared flycatcher</li></ul><ul><li type="disc">Ma's night monkey</li></ul><ul><li type="disc">Mallard</li></ul><ul><li type="disc">Silver-eye</li></ul><ul><li type="disc">Eastern brown snake</li></ul><ul><li type="disc">Tiger</li></ul><ul><li type="disc">Pig - Hampshire</li></ul><ul><li type="disc">Common canary</li></ul><ul><li type="disc">Tiger tail seahorse</li></ul><ul><li type="disc">Mouse PWK/PhJ</li></ul><ul><li type="disc">Greater bamboo lemur</li></ul><ul><li type="disc">West African mud turtle</li></ul><ul><li type="disc">Japanese medaka HSOK</li></ul><ul><li type="disc">Brown trout</li></ul><ul><li type="disc">Tuatara</li></ul><ul><li type="disc">Pig - Jinhua</li></ul><ul><li type="disc">Shrew</li></ul><ul><li type="disc">Sperm whale</li></ul><ul><li type="disc">European seabass</li></ul><ul><li type="disc">Pinecone soldierfish</li></ul><ul><li type="disc">Pig - Bamei</li></ul><ul><li type="disc">American black bear</li></ul><ul><li type="disc">Sheepshead minnow</li></ul><ul><li type="disc">Great Tit</li></ul><ul><li type="disc">Squirrel</li></ul><ul><li type="disc">Sailfin molly</li></ul><ul><li type="disc">Mouse BALB/cJ</li></ul><ul><li type="disc">Common wombat</li></ul><ul><li type="disc">Mouse WSB/EiJ</li></ul><ul><li type="disc">Eurasian sparrowhawk</li></ul><ul><li type="disc">Mouse 129S1/SvImJ</li></ul><ul><li type="disc">Horned golden-line barbel</li></ul><ul><li type="disc">Mongolian gerbil</li></ul><ul><li type="disc">Naked mole-rat male</li></ul><ul><li type="disc">Jewelled blenny</li></ul><ul><li type="disc">New Caledonian crow</li></ul><ul><li type="disc">American mink</li></ul><ul><li type="disc">Eastern buzzard</li></ul><ul><li type="disc">Australian saltwater crocodile</li></ul><ul><li type="disc">Chimpanzee</li></ul><ul><li type="disc">Horse</li></ul><ul><li type="disc">Common wall lizard</li></ul><ul><li type="disc">Kakapo</li></ul><ul><li type="disc">Abingdon island giant tortoise</li></ul><ul><li type="disc">Pig - Meishan</li></ul><ul><li type="disc">Golden pheasant</li></ul><ul><li type="disc">Hybrid - Bos Taurus</li></ul><ul><li type="disc">Mouse FVB/NJ</li></ul><ul><li type="disc">Chinese softshell turtle</li></ul><ul><li type="disc">Gilthead seabream</li></ul><ul><li type="disc">Okarito brown kiwi</li></ul><ul><li type="disc">Mangrove rivulus</li></ul><ul><li type="disc">Gelada</li></ul><ul><li type="disc">Leishan spiny toad</li></ul><ul><li type="disc">Kangaroo rat</li></ul><ul><li type="disc">Superb fairywren</li></ul><ul><li type="disc">Pachon cavefish</li></ul><ul><li type="disc">Mouse C57BL/6NJ</li></ul><ul><li type="disc">White-throated sparrow</li></ul><ul><li type="disc">Common carp huanghe</li></ul><ul><li type="disc">Donkey</li></ul><ul><li type="disc">Golden eagle</li></ul><ul><li type="disc">Red-bellied piranha</li></ul><ul><li type="disc">Elephant</li></ul><ul><li type="disc">Pig - Berkshire</li></ul><ul><li type="disc">Giant panda</li></ul><ul><li type="disc">Ballan wrasse</li></ul><ul><li type="disc">Eurasian red squirrel</li></ul><ul><li type="disc">Arabian camel</li></ul><ul><li type="disc">Bonobo</li></ul><ul><li type="disc">Ring-necked pheasant</li></ul><ul><li type="disc">Bushbaby</li></ul><ul><li type="disc">Nile tilapia</li></ul><ul><li type="disc">Common carp german mirror</li></ul><ul><li type="disc">Orange clownfish</li></ul><ul><li type="disc">Common kestrel</li></ul><ul><li type="disc">Pig - Rongchang</li></ul><ul><li type="disc">Coelacanth</li></ul><ul><li type="disc">Goldfish</li></ul><ul><li type="disc">Periophthalmus magnuspinnatus</li></ul><ul><li type="disc">Northern spotted owl</li></ul><ul><li type="disc">Shortfin molly</li></ul><ul><li type="disc">Crab-eating macaque</li></ul><ul><li type="disc">American bison</li></ul><ul><li type="disc">Yarkand deer</li></ul><ul><li type="disc">Electric eel</li></ul><ul><li type="disc">Climbing perch</li></ul><ul><li type="disc">Rabbit</li></ul><ul><li type="disc">Mouse</li></ul><ul><li type="disc">Gibbon</li></ul><ul><li type="disc">Monterrey platyfish</li></ul><ul><li type="disc">Mouse NZO/HlLtJ</li></ul><ul><li type="disc">Round goby</li></ul><ul><li type="disc">Yellow-billed parrot</li></ul><ul><li type="disc">Mainland tiger snake</li></ul><ul><li type="disc">Chinese hamster PICR</li></ul><ul><li type="disc">Pika</li></ul><ul><li type="disc">Mouse DBA/2J</li></ul><ul><li type="disc">Channel catfish</li></ul><ul><li type="disc">Japanese medaka HNI</li></ul><ul><li type="disc">Zebrafish</li></ul><ul><li type="disc">Small tree finch</li></ul><ul><li type="disc">Golden-collared manakin</li></ul><ul><li type="disc">Drosophila melanogaster</li></ul><ul><li type="disc">Chilean tinamou</li></ul><ul><li type="disc">Blue whale</li></ul><ul><li type="disc">Spiny chromis</li></ul><ul><li type="disc">Vervet-AGM</li></ul><ul><li type="disc">Burton's mouthbrooder</li></ul><ul><li type="disc">Denticle herring</li></ul><ul><li type="disc">Leopard</li></ul><ul><li type="disc">Tetraodon</li></ul><ul><li type="disc">Sheep</li></ul><ul><li type="disc">Mummichog</li></ul><ul><li type="disc">Pig</li></ul><ul><li type="disc">Komodo dragon</li></ul><ul><li type="disc">Greater amberjack</li></ul>
+        <a href="/">Main page</a>
+      </body>
+    </html>
+
+-----------------TEST 3--------------------
+* Input:
+http://127.0.0.1:8080/listSpecies?limit=specie
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Bases server</title>
+      </head>
+      <body style="background-color: #ff0000;">
+        <h1>ERROR</h1>
+        <p>Welcome to the DATA ERROR server</p>
+        <p>If you are here is because the data you have entered does not exist in ensembl.</p>
+        <p>Sorry!!</p>
+      <a href="/">Main page</a>
+      </body>
+    </html>
+
+---> karyotype endpoint
+-----------------TEST 1--------------------
+* Input:
+http://127.0.0.1:8080/karyotype?specie=human
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>KARYOTYPE</title>
+      </head>
+      <body style="background-color: lightskyblue;">
+        <h1>Karyotype of the human</h1>
+        <p>The names of the chromosomes are:</p>
+         1<br> 2<br> 3<br> 4<br> 5<br> 6<br> 7<br> 8<br> 9<br> 10<br> 11<br> 12<br> 13<br> 14<br> 15<br> 16<br> 17<br> 18<br> 19<br> 20<br> 21<br> 22<br> X<br> Y<br> MT<br>
+        <br><a href="/">Main page</a>
+      </body>
+    </html>
+
+-----------------TEST 2--------------------
+* Input:
+http://127.0.0.1:8080/karyotype?specie=4
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Bases server</title>
+      </head>
+      <body style="background-color: #ff0000;">
+        <h1>ERROR</h1>
+        <p>Welcome to the DATA ERROR server</p>
+        <p>If you are here is because the data you have entered does not exist in ensembl.</p>
+        <p>Sorry!!</p>
+      <a href="/">Main page</a>
+      </body>
+    </html>
+
+---> chromosomeLength endpoint
+-----------------TEST 1--------------------
+* Input:
+http://127.0.0.1:8080/chromosomeLength?specie=mouse&chromo=18
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>CHROMLENGTH</title>
+      </head>
+      <body style="background-color: lightskyblue;">
+        <h1>Chromosome Length </h1>
+        <p>Specie: mouse</p>
+        <p>Chromosome: 18</p>
+        <p>Length: 90720763</p>
+        <br><a href="/">Main page</a>
+      </body>
+    </html>
+
+-----------------TEST 2--------------------
+* Input:
+http://127.0.0.1:8080/chromosomeLength?specie=unicorn&chromo=2
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Bases server</title>
+      </head>
+      <body style="background-color: #ff0000;">
+        <h1>ERROR</h1>
+        <p>Welcome to the DATA ERROR server</p>
+        <p>If you are here is because the data you have entered does not exist in ensembl.</p>
+        <p>Sorry!!</p>
+      <a href="/">Main page</a>
+      </body>
+    </html>
+
+-----------------TEST 3--------------------
+* Input:
+http://127.0.0.1:8080/chromosomeLength?specie=&chromo=
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Bases server</title>
+      </head>
+      <body style="background-color: #ff0000;">
+        <h1>ERROR</h1>
+        <p>Welcome to the DATA ERROR server</p>
+        <p>If you are here is because the data you have entered does not exist in ensembl.</p>
+        <p>Sorry!!</p>
+      <a href="/">Main page</a>
+      </body>
+    </html>
