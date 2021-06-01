@@ -7,6 +7,16 @@ import jinja2
 from urllib.parse import urlparse, parse_qs
 import pathlib
 
+dict_genes = {"FRAT1": "ENSG00000165879",
+    "ADA":  "ENSG00000196839",
+    "FXN":  "ENSG00000165060",
+    "RNU6_269P": "ENSG00000212379",
+    "MIR633": "ENSG00000207552",
+    "TTTY4C": "ENSG00000228296",
+    "RBMY2YP": "ENSG00000227633",
+    "FGFR3": "ENSG00000068078",
+    "KDR": "ENSG00000128052",
+    "ANK2": "ENSG00000145362"}
 
 def print_colored(message, color):
     from termcolor import cprint, colored
@@ -67,26 +77,37 @@ def list_len(data_dict, specie, chromo):
     return content
 
 
-def seq_gene(data_dict, id):
+def seq_gene(data_dict, gene_id, gene_name):
     try:
         seq = data_dict["seq"]
-        context = {"seq": seq, "gene_id": id}
+        context = {"seq": seq, "gene_id": gene_id, "gene_name": gene_name}
         content = read_template_html_file("html/geneSeq.html").render(context=context)
     except KeyError:
         content = read_template_html_file("html/error.html").render()
     return content
 
 
-def info_gene(data_dict, id):
-    pass
+def info_gene(data_dict, gene_id, gene_name):
+    try:
+        chrom_name = data_dict["desc"].split(":")[2]
+        start = data_dict["desc"].split(":")[3]
+        end = data_dict["desc"].split(":")[4]
+        seq_len = int(data_dict["desc"].split(":")[4])-int(data_dict["desc"].split(":")[3]) + 1
+        context = {"seq_len": seq_len, "gene_id": gene_id, "gene_name": gene_name,
+                   "chro_name": chrom_name, "start": start, "end": end}
+        content = read_template_html_file("html/geneInfo.html").render(context=context)
+    except KeyError:
+        content = read_template_html_file("html/error.html").render()
+    return content
 
 
-def calc_gene(data_dict, id):
+def calc_gene(data_dict, gene_id, gene_name):
     try:
         seq1 = Seq(data_dict["seq"])
         seq_len = seq1.len()
         seq_count = seq1.count()
-        context = {"seq": seq1, "gene_id": id, "seq_len": seq_len, "seq_count": seq_count}
+        seq_per = seq1.percentage_base(seq1.count_bases(), seq_len)
+        context = {"seq_per": seq_per, "gene_id": gene_id, "seq_len": seq_len, "seq_count": seq_count, "gene_name": gene_name}
         content = read_template_html_file("html/geneCalc.html").render(context=context)
     except KeyError:
         content = read_template_html_file("html/error.html").render()
@@ -143,3 +164,10 @@ class Seq:
     def count(self):
         a, c, g, t = self.count_bases()
         return {"A" : a, "C": c , "G" : g, "T" : t}
+
+    def percentage_base(self, count_bases, seq_len):
+        a = str(round(count_bases[0] / seq_len*100, 2)) + "%"
+        c = str(round(count_bases[1] / seq_len * 100, 2)) + "%"
+        g = str(round(count_bases[2] / seq_len * 100, 2)) + "%"
+        t = str(round(count_bases[3] / seq_len * 100, 2)) + "%"
+        return {"A": a, "C": c, "G": g, "T": t}

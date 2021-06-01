@@ -5,7 +5,8 @@
         <title>GENE SEQ</title>
       </head>
       <body style="background-color: lightsteelblue;">
-        <h1>Sequence of the gene {{context.gene_id}}</h1>
+        <h1>Sequence of the gene {{context.gene_name}}</h1>
+        <h3>Ensembl ID: {{context.gene_id}}</h3>
         <p>The sequence is:</p>
         <textarea id="gene_content" name="gene_bases" rows="40" cols="150">
           {{context.seq}}

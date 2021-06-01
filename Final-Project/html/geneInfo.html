@@ -4,9 +4,13 @@
         <meta charset="utf-8">
         <title>INFO SEQ</title>
       </head>
-      <body style="background-color: lightsteelblue;">
-        <h1>Information of the gene {{context.gene_id}}</h1>
-
+      <body style="background-color: lightgoldenrodyellow;">
+        <h1>Information of the gene {{context.gene_name}}</h1>
+        <h3>Ensembl ID:</h3>{{context.gene_id}}
+        <h3>Chromosome name:</h3>Chromosome {{context.chro_name}}
+        <h3>Start:</h3>{{context.start}}
+        <h3>End:</h3>{{context.end}}
+        <h3>Length:</h3>{{context.seq_len}}
         <br><br><a href="/">Main page</a>
       </body>
     </html>

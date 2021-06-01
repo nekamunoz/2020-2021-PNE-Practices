@@ -8,7 +8,7 @@ from urllib.parse import urlparse, parse_qs
 import serverutils as su
 import pathlib
 
-PORT = 8080
+PORT = 8081
 socketserver.TCPServer.allow_reuse_address = True
 
 
@@ -45,6 +45,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = su.list_len(dict_len, specie, chromo)
             except KeyError:
                 contents = su.read_template_html_file("./html/error.html").render()
+
         elif path_name.startswith("/gene"):
             try:
                 gene_name = arguments["gene"][0]

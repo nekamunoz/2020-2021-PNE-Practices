@@ -5,10 +5,13 @@
         <title>CALC SEQ</title>
       </head>
       <body style="background-color: lightgoldenrodyellow;">
-        <h1>Calculation of the gene {{context.gene_id}}</h1>
-        <h3>Total length: </h3>{{context.seq_len}}<br>
+        <h1>Calculation of the gene {{context.gene_name}}</h1>
+        <h3>Ensembl ID:</h3> {{context.gene_id}}
+        <h3>Total length:</h3>{{context.seq_len}}
+        <h3>Percentage bases: </h3>{% for n in context.seq_per %}
+        <p>{{n}}: {{context.seq_per[n]}}</p>{% endfor %}
         <h3>Count bases: </h3>{% for n in context.seq_count %}
-        <p>Count {{n}}: {{context.seq_count[n]}}</p>{% endfor %}
+        <p>{{n}}: {{context.seq_count[n]}}</p>{% endfor %}
         <br><br><a href="/">Main page</a>
       </body>
     </html>
