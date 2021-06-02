@@ -6,11 +6,12 @@ import clientutils as cu
 
 PORT = 8080
 SERVER = 'localhost'
-url_request = "/geneSeq?gene=FRAT1&json=1"   #CHANGE THE URL HERE
+url_request = "/?json=1"   #CHANGE THE URL HERE
 path_name = url_request.split("?")[0]
 
 if "json=1" in url_request:
-    print(f"\nConnecting to server: {SERVER}:{PORT}\n")
+    cprint(f"\nURL requested: {url_request}", 'red')
+    cprint(f"\nConnecting to server: {SERVER}:{PORT}\n", 'red')
     conn = http.client.HTTPConnection(SERVER, PORT)
     try:
         conn.request("GET", url_request)
@@ -18,10 +19,13 @@ if "json=1" in url_request:
         print("ERROR! Cannot connect to the Server")
         exit()
     r = conn.getresponse()
-    print(f"Response received!: {r.status} {r.reason}\n")
-    data = r.read().decode("utf-8")
+    cprint(f"Response received!: {r.status} {r.reason}\n", 'red')
+    response = r.read().decode("utf-8")
+    data = json.loads(response)
+
     if path_name == "/":
         cprint("\n----- INDEX ----", 'yellow')
+        cu.print_index(data)
 
     elif path_name == "/listSpecies":
         cprint("\n---- ListSpecies ----", 'yellow')

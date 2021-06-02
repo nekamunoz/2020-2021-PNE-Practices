@@ -34,7 +34,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents, content_type = su.gene(arguments, path_name)
         else:
             if "json" in arguments.keys() and arguments["json"][0] == "1":
-                contents, content_type = cu.get_json({"ERROR": "error"}), 'application/json'
+                contents, content_type = su.get_json({"ERROR": "ERROR"}), 'application/json'
             else:
                 contents, content_type = su.read_template_html_file("html/error.html").render(), 'text/html'
         self.send_response(200)

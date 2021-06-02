@@ -50,12 +50,12 @@ def obtain_dict(ENDPOINT):
 
 
 def index(context, arguments):
+    context["dict_genes"] = dict_genes
     if "json" in arguments.keys() and arguments["json"][0] =="1":
-        context["dict_genes"] = dict_genes
-        contents = get_json({"indice": "este es el indice"})
+        contents = get_json({"index":
+                    """-BASIC level\n1) Species list\n2) Species karyotype\n3) Chromosome length\n\n-INTERMEDIATE level\n4) Gene sequence \n5) Gene information\n6) Gene calculations\n"""})
         content_type = 'application/json'
     else:
-        context["dict_genes"] = dict_genes
         contents = read_template_html_file("./html/indx.html").render(context=context)
         content_type = 'text/html'
     return contents, content_type
