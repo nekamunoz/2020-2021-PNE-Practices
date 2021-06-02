@@ -32,6 +32,10 @@ def read_template_html_file(filename):
     return jinja2.Template(pathlib.Path(filename).read_text())
 
 
+def get_json(data_dict):
+    return json.dumps(data_dict)
+
+
 def obtain_dict(ENDPOINT):
     SERVER = "rest.ensembl.org"
     PARAMS = "?content-type=application/json"
@@ -45,8 +49,23 @@ def obtain_dict(ENDPOINT):
     return dict_data
 
 
-def list_species(data_dict, limit):
-    number_species = len(data_dict["species"])
+def index(context, arguments):
+    context["dict_genes"] = dict_genes
+    if "json" in arguments.keys() and arguments["json"][0] == "1":
+        contents = get_json({"index":"""-BASIC level\n1) Species list\n2) Species karyotype\n3) Chromosome length
+        \n-INTERMEDIATE level\n4) Gene sequence \n5) Gene information\n6) Gene calculations\n"""})
+        content_type = 'application/json'
+    else:
+        contents = read_template_html_file("./html/indx.html").render(context=context)
+        content_type = 'text/html'
+    return contents, content_type
+
+
+def list_species(arguments, data_dict):
+    try:
+        limit = arguments["limit"][0]
+    except KeyError:
+        limit = len(data_dict["species"])
     species_list = []
     try:
         for n in range(0, int(limit)):
@@ -56,67 +75,132 @@ def list_species(data_dict, limit):
                 pass
             except IndexError:
                 break
-        context = {"limit": limit, "list_species": species_list, "number_species": number_species}
-        content = read_template_html_file("html/list_species.html").render(context=context)
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents = get_json({"limit": limit, "list_species": species_list, "number_species": len(data_dict["species"])})
+            content_type = 'application/json'
+        else:
+            context = {"limit": limit, "list_species": species_list, "number_species": len(data_dict["species"])}
+            contents = read_template_html_file("html/list_species.html").render(context=context)
+            content_type = 'text/html'
     except ValueError:
-        content = read_template_html_file("html/error.html").render()
-    return content
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "Incorrect limit."}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
 
 
-def list_chrom(data_dict, specie):
+def list_chrom(arguments):
     try:
-        context = {"specie": specie, "karyotype": data_dict["karyotype"]}
-        content = read_template_html_file("html/karyotype.html").render(context=context)
+        specie = take_out_space(arguments["specie"][0])
+        data_dict = obtain_dict("/info/assembly/" + specie)
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents = get_json({"specie": specie, "karyotype": data_dict["karyotype"]})
+            content_type = 'application/json'
+
+        else:
+            context = {"specie": specie, "karyotype": data_dict["karyotype"]}
+            contents = read_template_html_file("html/karyotype.html").render(context=context)
+            content_type = 'text/html'
     except KeyError:
-        content = read_template_html_file("html/error.html").render()
-    return content
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "Incorrect karyotype."}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
 
 
-def list_len(data_dict, specie, chromo):
+def list_len(arguments):
     try:
+        specie = take_out_space(arguments["specie"][0])
+        chromo = arguments["chromo"][0]
+        data_dict = obtain_dict("/info/assembly/" + specie + "/" + chromo)
         chromo_len = data_dict["length"]
-        context = {"specie": specie, "chromo": chromo, "chromo_len": chromo_len}
-        content = read_template_html_file("html/chromosomeLength.html").render(context=context)
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents = get_json({"specie": specie, "chromo": chromo, "chromo_len": chromo_len})
+            content_type = 'application/json'
+        else:
+            context = {"specie": specie, "chromo": chromo, "chromo_len": chromo_len}
+            contents = read_template_html_file("html/chromosomeLength.html").render(context=context)
+            content_type = 'text/html'
     except KeyError:
-        content = read_template_html_file("html/error.html").render()
-    return content
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "Incorrect specie or chromosome."}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
 
 
-def seq_gene(data_dict, gene_id, gene_name):
+def gene(arguments, path_name):
     try:
-        seq = data_dict["seq"]
-        context = {"seq": seq, "gene_id": gene_id, "gene_name": gene_name}
-        content = read_template_html_file("html/geneSeq.html").render(context=context)
+        gene_name = arguments["gene"][0]
+        gene_id = dict_genes[gene_name]
+        gene_seq = obtain_dict("/sequence/id/" + gene_id)
+        if path_name == "/geneSeq":
+            contents, content_type = seq_gene(arguments, gene_seq, gene_id, gene_name)
+        elif path_name == "/geneInfo":
+            contents, content_type = info_gene(arguments, gene_seq, gene_id, gene_name)
+        elif path_name == "/geneCalc":
+            contents, content_type = calc_gene(arguments, gene_seq, gene_id, gene_name)
     except KeyError:
-        content = read_template_html_file("html/error.html").render()
-    return content
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "Incorrect gene."}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
 
 
-def info_gene(data_dict, gene_id, gene_name):
+def seq_gene(arguments, data_dict, gene_id, gene_name):
     try:
-        chrom_name = data_dict["desc"].split(":")[2]
+        context = {"seq": data_dict["seq"], "gene_id": gene_id, "gene_name": gene_name}
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json(context), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/geneSeq.html").render(context=context), 'text/html'
+    except KeyError:
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "error"}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
+
+
+def info_gene(arguments, data_dict, gene_id, gene_name):
+    try:
+        chro_name = data_dict["desc"].split(":")[2]
         start = data_dict["desc"].split(":")[3]
         end = data_dict["desc"].split(":")[4]
         seq_len = int(data_dict["desc"].split(":")[4])-int(data_dict["desc"].split(":")[3]) + 1
         context = {"seq_len": seq_len, "gene_id": gene_id, "gene_name": gene_name,
-                   "chro_name": chrom_name, "start": start, "end": end}
-        content = read_template_html_file("html/geneInfo.html").render(context=context)
+                   "chro_name": chro_name, "start": start, "end": end}
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json(context), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/geneInfo.html").render(context=context), 'text/html'
     except KeyError:
-        content = read_template_html_file("html/error.html").render()
-    return content
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "error"}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
 
 
-def calc_gene(data_dict, gene_id, gene_name):
+def calc_gene(arguments, data_dict, gene_id, gene_name):
     try:
         seq1 = Seq(data_dict["seq"])
-        seq_len = seq1.len()
-        seq_count = seq1.count()
-        seq_per = seq1.percentage_base(seq1.count_bases(), seq_len)
-        context = {"seq_per": seq_per, "gene_id": gene_id, "seq_len": seq_len, "seq_count": seq_count, "gene_name": gene_name}
-        content = read_template_html_file("html/geneCalc.html").render(context=context)
+        seq_per = seq1.percentage_base(seq1.count_bases(), seq1.len())
+        context = {"seq_per": seq_per, "gene_id": gene_id, "seq_len": seq1.len(),
+                   "seq_count": seq1.count(), "gene_name": gene_name}
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json(context), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/geneCalc.html").render(context=context), 'text/html'
     except KeyError:
-        content = read_template_html_file("html/error.html").render()
-    return content
+        if "json" in arguments.keys() and arguments["json"][0] == "1":
+            contents, content_type = get_json({"ERROR": "error"}), 'application/json'
+        else:
+            contents, content_type = read_template_html_file("html/error.html").render(), 'text/html'
+    return contents, content_type
 
 
 

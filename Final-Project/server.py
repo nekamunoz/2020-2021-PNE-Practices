@@ -6,6 +6,7 @@ import http.server
 import jinja2
 from urllib.parse import urlparse, parse_qs
 import serverutils as su
+import clientutils as cu
 import pathlib
 
 PORT = 8080
@@ -21,45 +22,21 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         print("Parameters:", arguments)
         context = {}
         if path_name == "/":
-            context["dict_genes"] = su.dict_genes
-            contents = su.read_template_html_file("./html/indx.html").render(context=context)
+            contents, content_type = su.index(context, arguments)
         elif path_name == "/listSpecies":
             dict_species = su.obtain_dict("/info/species")
-            try:
-                limit = arguments["limit"][0]
-            except KeyError:
-                limit = len(dict_species["species"])
-            contents = su.list_species(dict_species, limit)
+            contents, context_type = su.list_species(arguments, dict_species)
         elif path_name == "/karyotype":
-            try:
-                specie = su.take_out_space(arguments["specie"][0])
-                dict_chrom = su.obtain_dict("/info/assembly/" + specie)
-                contents = su.list_chrom(dict_chrom, specie)
-            except KeyError:
-                contents = su.read_template_html_file("./html/error.html").render()
+            contents, content_type = su.list_chrom(arguments)
         elif path_name == "/chromosomeLength":
-            try:
-                specie = su.take_out_space(arguments["specie"][0])
-                chromo = arguments["chromo"][0]
-                dict_len = su.obtain_dict("/info/assembly/" + specie + "/" + chromo)
-                contents = su.list_len(dict_len, specie, chromo)
-            except KeyError:
-                contents = su.read_template_html_file("./html/error.html").render()
+            contents, content_type = su.list_len(arguments)
         elif path_name.startswith("/gene"):
-            try:
-                gene_name = arguments["gene"][0]
-                gene_id = su.dict_genes[gene_name]
-                gene_seq = su.obtain_dict("/sequence/id/" + gene_id)
-                if path_name == "/geneSeq":
-                    contents = su.seq_gene(gene_seq, gene_id, gene_name)
-                elif path_name == "/geneInfo":
-                    contents = su.info_gene(gene_seq, gene_id, gene_name)
-                elif path_name == "/geneCalc":
-                    contents = su.calc_gene(gene_seq, gene_id, gene_name)
-            except KeyError:
-                contents = su.read_template_html_file("./html/error.html").render()
+            contents, content_type = su.gene(arguments, path_name)
         else:
-            contents = su.read_template_html_file("./html/error.html").render()
+            if "json" in arguments.keys() and arguments["json"][0] == "1":
+                contents, content_type = su.get_json({"ERROR": "Error in the path."}), 'application/json'
+            else:
+                contents, content_type = su.read_template_html_file("html/error.html").render(), 'text/html'
         self.send_response(200)
         self.send_header('Content-Type', 'text/html')
         self.send_header('Content-Length', len(contents.encode()))
