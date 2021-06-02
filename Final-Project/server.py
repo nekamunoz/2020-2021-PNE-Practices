@@ -32,14 +32,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = su.list_species(dict_species, limit)
         elif path_name == "/karyotype":
             try:
-                specie = arguments["specie"][0]
+                specie = su.take_out_space(arguments["specie"][0])
                 dict_chrom = su.obtain_dict("/info/assembly/" + specie)
                 contents = su.list_chrom(dict_chrom, specie)
             except KeyError:
                 contents = su.read_template_html_file("./html/error.html").render()
         elif path_name == "/chromosomeLength":
             try:
-                specie = arguments["specie"][0]
+                specie = su.take_out_space(arguments["specie"][0])
                 chromo = arguments["chromo"][0]
                 dict_len = su.obtain_dict("/info/assembly/" + specie + "/" + chromo)
                 contents = su.list_len(dict_len, specie, chromo)

@@ -18,9 +18,14 @@ dict_genes = {"FRAT1": "ENSG00000165879",
     "KDR": "ENSG00000128052",
     "ANK2": "ENSG00000145362"}
 
+
 def print_colored(message, color):
     from termcolor import cprint, colored
     print(colored(message,color))
+
+
+def take_out_space(word):
+    return word.replace(" ", "_")
 
 
 def read_template_html_file(filename):

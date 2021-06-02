@@ -2,7 +2,7 @@ import http.client
 import json
 import termcolor
 
-PORT = 8080
+PORT = 7070
 SERVER = 'localhost'
 
 print(f"\nConnecting to server: {SERVER}:{PORT}\n")
@@ -30,10 +30,12 @@ data1 = r1.read().decode("utf-8")
 # -- Create a variable with the data,
 # -- form the JSON received
 people = json.loads(data1)
+print(people)
 
 print("CONTENT: ")
 print()
 for person in people:
+    print(person)
     termcolor.cprint("Name: ", 'green', end="")
     print(person['Firstname'], person['Lastname'])
 

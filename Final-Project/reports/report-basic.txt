@@ -104,6 +104,25 @@ http://127.0.0.1:8080/karyotype?specie=4
       </body>
     </html>
 
+-----------------TEST 3--------------------
+* Input:
+http://127.0.0.1:8080/karyotype?specie=homo sapiens
+
+* Output:
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>KARYOTYPE</title>
+      </head>
+      <body style="background-color: lightcyan;">
+        <h1>Karyotype of the homo_sapiens</h1>
+        <p>The names of the chromosomes are:</p>
+         1<br> 2<br> 3<br> 4<br> 5<br> 6<br> 7<br> 8<br> 9<br> 10<br> 11<br> 12<br> 13<br> 14<br> 15<br> 16<br> 17<br> 18<br> 19<br> 20<br> 21<br> 22<br> X<br> Y<br> MT<br>
+        <br><a href="/">Main page</a>
+      </body>
+    </html>
+
 ---> chromosomeLength endpoint
 -----------------TEST 1--------------------
 * Input:
